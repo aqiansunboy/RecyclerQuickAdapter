@@ -1,0 +1,2 @@
+# RecyclerQuickAdapter
+提供一套可以为RecyclerView添加Header和Footer的适配器解决方案

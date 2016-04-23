@@ -4,7 +4,7 @@
   <img src="https://github.com/aqiansunboy/RecyclerQuickAdapter/blob/master/Screenshot.png?raw=true" alt="RecyclerQuickAdapter" title="RecyclerQuickAdapter">
 </p>
 ### 头疼的RecyclerView
-**RecyclerView**是Android Support V7库提供的一个全新的控件，是统一代替ListView和GridView的全新解决方案，并且提供更多的布局模式。有兴趣的小伙伴，是时候抛弃传统臃肿的ListView和GridView，拥抱RecyclerView吧。但是，虽然RecyclerView什么都好，但偏偏不能添加头部和尾部。这点，我相信让一开始接触RecyclerView的伙伴们走了不少弯路，包括我也是。为了方便团队的开发，我对官方的RecyclerAdapter进行了一些封装。使得开发者可以方便的为RecyclerView添加头部和尾部。并在公司项目实施过程中，修复了相关BUG。在这里开源出来，希望能安利更多的Android开发小伙伴。
+**RecyclerView**是Android Support V7库提供的一个全新的控件，是统一代替ListView和GridView的全新解决方案，并且提供更多的布局模式。有兴趣的小伙伴，是时候抛弃传统臃肿的ListView和GridView，拥抱RecyclerView吧。但是，虽然RecyclerView什么都好，但偏偏不能添加头部和尾部。这点，我相信让一开始接触RecyclerView的伙伴们走了不少弯路，包括我也是。为了方便团队的开发，我对官方的RecyclerView.Adapter进行了一些封装。使得开发者可以方便的为RecyclerView添加头部和尾部。并在公司项目实施过程中，修复了相关BUG。在这里开源出来，希望能安利更多的Android开发小伙伴。
 
 ### 主要Api
 

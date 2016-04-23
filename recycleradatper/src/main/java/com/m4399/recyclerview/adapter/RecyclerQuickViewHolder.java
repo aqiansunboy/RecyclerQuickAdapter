@@ -132,8 +132,11 @@ public abstract class RecyclerQuickViewHolder extends RecyclerView.ViewHolder
         return setImageUrl(view,imageUrl,imageHolderId, isScrolling);
     }
 
-    public abstract RecyclerQuickViewHolder setImageUrl(ImageView view, String imageUrl, int imageHolderId,
-                                               boolean isScrolling);
+    public RecyclerQuickViewHolder setImageUrl(ImageView view, String imageUrl, int imageHolderId,
+                                               boolean isScrolling)
+    {
+        return this;
+    }
 
     public RecyclerQuickViewHolder setBackgroundColor(int viewId, int colorId)
     {

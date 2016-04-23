@@ -217,7 +217,7 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
     {
         if (hasHeader())
         {
-            return hasFooter() ? mData.size() + 2 : mData.size() + 1;
+            return hasFooter() ? mData.size() + 1 + 1 : mData.size() + 1;
         }
         else
         {
@@ -267,8 +267,11 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
         }
         else
         {
-            onBindItemViewHolder((VH)holder, position,position, isScrolling);
-            ((VH) holder).itemView.setOnClickListener(getOnClickListener(position));
+            if (!isFooter(position))
+            {
+                onBindItemViewHolder((VH) holder, position, position, isScrolling);
+                ((VH) holder).itemView.setOnClickListener(getOnClickListener(position));
+            }
         }
     }
 
@@ -344,18 +347,22 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
      */
     public void add(T elem)
     {
+        if (elem == null)
+        {
+            return;
+        }
+
         mData.add(elem);
 
-        if (hasHeader())
+        int positionStart = getItemCount() - 1;
+        if (hasFooter())
         {
-            notifyItemInserted(mData.size());
-        }
-        else
-        {
-            notifyItemInserted(mData.size() - 1);
+            // 减一是减FOOTER的
+            positionStart--;
         }
 
-        notifyItemRangeChanged(getItemCount()-1,1);
+        notifyItemInserted(positionStart);
+
     }
 
     /**
@@ -369,17 +376,16 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
             return;
         }
 
-        final int positionStart = mData.size();
+        int positionStart = getItemCount();
+        if (hasFooter())
+        {
+            // 减一是减FOOTER的
+            positionStart--;
+        }
+
         mData.addAll(elem);
 
-        if (hasHeader())
-        {
-            notifyItemRangeInserted(positionStart+1, elem.size());
-        }
-        else
-        {
-            notifyItemRangeInserted(positionStart, elem.size());
-        }
+        notifyItemRangeInserted(positionStart, elem.size());
     }
 
     /**
@@ -399,6 +405,11 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
      */
     public void set(int index, T elem)
     {
+        if (elem == null)
+        {
+            return;
+        }
+
         if (index >= mData.size())
         {
             return;

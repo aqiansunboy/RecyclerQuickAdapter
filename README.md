@@ -118,14 +118,17 @@
 
 ### RecyclerQuickViewHolder.java
 
-这个类是对官方的RecyclerView.ViewHolder的适当封装，方便对View设置比如文字、颜色、可见性等属性。可进行链式操作。比如：
+这个类是对官方的RecyclerView.ViewHolder的适当封装，方便对View设置比如文字、颜色、可见性等属性。可进行链式操作。比如
 ```java
 viewholder.setImageUrl(mIconView, mIconUrl(),R.mipmap.placeholder)
           .setText(mNameView, mName);
 ```
 其中对于方法
 ```java
-public RecyclerQuickViewHolder setImageUrl(ImageView view, String imageUrl, int imageHolderId,boolean isScrolling)
+public RecyclerQuickViewHolder setImageUrl(ImageView view, 
+                                           String imageUrl, 
+                                           int imageHolderId,
+                                           boolean isScrolling)
 ```
 由于实现者可能使用不同的图片加载库，比如**Glide**、**ImageLoader**等。所以这个方法需要实现者自行重载使用。
 

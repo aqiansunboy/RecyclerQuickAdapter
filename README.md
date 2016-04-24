@@ -6,9 +6,9 @@
 ### 头疼的RecyclerView
 **RecyclerView**是Android Support V7库提供的一个全新的控件，是统一代替ListView和GridView的全新解决方案，并且提供更多的布局模式。有兴趣的小伙伴，是时候抛弃传统臃肿的ListView和GridView，拥抱RecyclerView吧。但是，虽然RecyclerView什么都好，但偏偏不能添加头部和尾部。这点，我相信让一开始接触RecyclerView的伙伴们走了不少弯路，包括我也是。为了方便团队的开发，我对官方的RecyclerView.Adapter进行了一些封装。使得开发者可以方便的为RecyclerView添加头部和尾部。并在公司项目实施过程中，修复了相关BUG。在这里开源出来，希望能安利更多的Android开发小伙伴。
 
-### 主要Api
+### RecyclerQuickAdapter.java
 
-#### 工具类Api
+#### 工具类API
 ```java
     /**
      * 设置头部视图
@@ -81,7 +81,7 @@
     }
 ```
 
-#### 需要子类实现的抽象Api
+#### 抽象API
 ```java
     /**
      * 指定列表示图类型，获取列表的layoutId
@@ -115,6 +115,19 @@
     protected abstract void onBindItemViewHolder(VH holder, int position, int index,
                                                  boolean isScrolling);
 ```
+
+### RecyclerQuickViewHolder.java
+
+这个类是对官方的RecyclerView.ViewHolder的适当封装，方便对View设置比如文字、颜色、可见性等属性。可进行链式操作。比如：
+```java
+viewholder.setImageUrl(mIconView, mIconUrl(),R.mipmap.placeholder)
+          .setText(mNameView, mName);
+```
+其中对于方法
+```java
+public RecyclerQuickViewHolder setImageUrl(ImageView view, String imageUrl, int imageHolderId,boolean isScrolling)
+```
+由于实现者可能使用不同的图片加载库，比如**Glide**、**ImageLoader**等。所以这个方法需要实现者自行重载使用。
 
 ### 需要注意的坑
 ViewHolder的布局文件，最顶级的容器height必须设置为**android:layout_height="wrap_content"**，如果是设为**match_parent**，在support-v23.3.0版本中，会有不可思议的BUG，通过断点RecyclerView的代码才定位问题原因并解决的。总之一句话，巨坑，慎重！！！上一个示例：

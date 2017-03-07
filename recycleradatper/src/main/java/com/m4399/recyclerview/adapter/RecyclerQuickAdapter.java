@@ -276,7 +276,7 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
     }
 
     /**
-     * 设置头部的示图
+     * 设置头部的视图
      * @param headerView 头部的示图
      */
     public void setHeaderView(RecyclerQuickViewHolder headerView)
@@ -294,6 +294,10 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
         return (HEADER) mHeaderView;
     }
 
+    /**
+     * 设置尾部视图
+     * @param footerView
+     */
     public void setFooterView(RecyclerQuickViewHolder footerView)
     {
         this.mFooterView = footerView;
@@ -334,8 +338,8 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
     /**
      * 绑定VH与数据
      *  @param holder       VH对象
-     * @param position      VH在RecyclerView中的位置
-     * @param index         数据真实索引（如果有header，index = positioin-1，如果没有header，index = position
+     * @param position      VH在RecyclerView中的位置（有Header或Footer时并不表示数据源的索引）
+     * @param index         数据真实索引（为了安全，子类取数据源的数据，索引都用这个值）
      * @param isScrolling   标记是否是滚动中
      */
     protected abstract void onBindItemViewHolder(VH holder, int position, int index,
@@ -482,15 +486,15 @@ public abstract class RecyclerQuickAdapter<T, VH extends RecyclerQuickViewHolder
 
     /**
      * 设置列表项的点击事件
-     * @param l 点击事件监听器
+     * @param listener 点击事件监听器
      */
-    public void setOnItemClickListener(OnItemClickListener l)
+    public void setOnItemClickListener(OnItemClickListener listener)
     {
-        mListener = l;
+        mListener = listener;
     }
 
     /**
-     *
+     * 生成对应位置的点击监听器
      * @param position
      * @return
      */
